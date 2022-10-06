@@ -14,10 +14,10 @@ public class ThreeStack {
 	int pointer1 = m-1;
 	int pointer2 = m;
 	int pointer3 = m+m;
-	int data[];
+	int a[];
 	
 	public ThreeStack() {
-		data = new int[n]; //creating a array for storing three stack. it contain by default 0 value.
+		a = new int[n]; //creating a array for storing three stack. it contain by default 0 value.
 	}
 	
 	
@@ -25,16 +25,16 @@ public class ThreeStack {
 		
 	}
 	
-	public boolean isEmpty(String stackName) {
-		if(stackName.equalsIgnoreCase("stack1")) {
+	public boolean isEmpty(int stackNumber) {
+		if(stackNumber == 1) {
 			if(pointer1 == m-1) {
 				return true;
 			}
-		} else if(stackName.equalsIgnoreCase("stack2")) {
+		} else if(stackNumber == 2) {
 			if(pointer2 == m) {
 				return true;
 			}
-		} else if(stackName.equalsIgnoreCase("stack3")) {
+		} else if(stackNumber == 3) {
 			if(pointer3 == (m+m)) {
 				return true;
 			}
@@ -43,35 +43,83 @@ public class ThreeStack {
 	}
 	
 	
-	public boolean isFull(String stackName) {
-		if(stackName.equalsIgnoreCase("stack1")) {
-			if(pointer1 == 0) {
+	public boolean isFull(int stackNumber) {
+		if(stackNumber == 1) {
+			if(pointer1 == -1) {
 				return true;
 			}
-		} else if(stackName.equalsIgnoreCase("stack2")) {
-			if(pointer2 == (m+m-1)) {
+		} else if(stackNumber == 2) {
+			if(pointer2 == (m+m)) {
 				return true;
 			}
-		} else if(stackName.equalsIgnoreCase("stack3")) {
-			if(pointer3 == ((m+m+m)-1)) {
+		} else if(stackNumber == 3) {
+			if(pointer3 == (m+m+m)) {
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	public void push(String stackName, int data) {
-		if(stackName.equalsIgnoreCase("stack1")) {
-			if(this.isFull(stackName)) {
-				System.out.println("stack :"+stackName+" is full.");
+	
+	public void push(int stackNumber, int data) {
+		if(stackNumber == 1) {
+			if(this.isFull(stackNumber)) {
+				System.out.println("stack :"+stackNumber+" is full.");
+			} else {
+				a[pointer1] = data;
+				pointer1--;
 			}
-		} else if(stackName.equalsIgnoreCase("stack2")) {
-			
-		} else if(stackName.equalsIgnoreCase("stack3")) {
-			
+		} else if(stackNumber == 2) {
+			if(this.isFull(stackNumber)) {
+				System.out.println("stack :"+stackNumber+" is full.");
+			} else {
+				a[pointer2] = data;
+				pointer2++;
+			}
+		} else if(stackNumber == 3) {
+			if(this.isFull(stackNumber)) {
+				System.out.println("stack :"+stackNumber+" is full.");
+			} else {
+				a[pointer3] = data;
+				pointer3++;
+			}
 		}
-			
 	}
+	
+	
+	public int pop(int stackNumber) {
+		if(stackNumber == 1) {
+			if(this.isEmpty(stackNumber)) {
+				System.out.println("stack: "+stackNumber+" is empty.");
+				return -1;
+			} else {
+				int data = a[pointer1];
+				pointer1++;
+				return data;
+			}
+		} else if(stackNumber == 2) {
+			if(this.isEmpty(stackNumber)) {
+				System.out.println("stack: "+stackNumber+" is empty.");
+				return -1;
+			} else {
+				int data = a[pointer2];
+				pointer2--;
+				return data;
+			}
+		} else if(stackNumber == 3) {
+			if(this.isEmpty(stackNumber)) {
+				System.out.println("stack: "+stackNumber+" is empty.");
+				return -1;
+			} else {
+				int data = a[pointer3];
+				pointer3++;
+				return data;
+			}
+		}
+		return -1;
+	}
+	
+	
 	
 	
 	
@@ -80,12 +128,4 @@ public class ThreeStack {
 	/*
 	 * References : https://github.com/srsandy/Data-Structures-and-Algorithms-in-Java-2nd-Edition-by-Robert-Lafore/blob/master/Chapter-04/StackApp.java
 	 */
-	
-//	if(stackName.equalsIgnoreCase("stack1")) {
-//		
-//	} else if(stackName.equalsIgnoreCase("stack2")) {
-//		
-//	} else if(stackName.equalsIgnoreCase("stack3")) {
-//		
-//	}
 }
