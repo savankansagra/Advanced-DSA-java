@@ -1,5 +1,7 @@
 package searchingandsorting;
 
+import java.util.Objects;
+
 class Student{
 	public String studentName;
 	public int studentRollNumber;
@@ -20,6 +22,23 @@ class Student{
 	public String toString() {
 		return "Student [studentName=" + studentName + ", studentRollNumber=" + studentRollNumber + ", totalMarks="
 				+ totalMarks + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(studentName, studentRollNumber, totalMarks);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Student other = (Student) obj;
+		return studentRollNumber == other.studentRollNumber;
 	}	
 	
 	
