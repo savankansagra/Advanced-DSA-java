@@ -39,6 +39,7 @@ public class DoubleHashingProbing {
 		hashedArray[key] = data;
 	}
 	
+	
 	/*
 	 *  first hash function  
 	 */
@@ -46,7 +47,7 @@ public class DoubleHashingProbing {
 		int key = data % arraySize;
 		return key;
 	}
-	
+
 	
 	/*
 	 *  Second hash function
@@ -55,6 +56,57 @@ public class DoubleHashingProbing {
 		int primeNumber = getPrime();
 		return  primeNumber - key % primeNumber;
 	}
+	
+	
+	/**
+	 * divisor as hash function.
+	 * 
+	 * @param data
+	 * @return
+	 */
+	private int hash1Divisor(int data) {
+		int key = data / arraySize;
+		return key;
+	}
+	
+	
+	/**
+	 * trucate digit as hash function.
+	 * 
+	 * @param data
+	 * @return
+	 */
+	private int hash1Truncate(int data) {
+		String dataString = String.valueOf(data);
+		String keyString = dataString.substring(dataString.length()-1,dataString.length());
+		int key = Integer.parseInt(keyString);
+		return key;
+	}
+	
+	
+	/**
+	 * folding hash function.
+	 * 
+	 * @param data
+	 * @Return
+	 */
+	private int hash1Folding(int data) {
+		// divide the data into length of 2.
+		int groupSize = 2;
+		int key = 0;
+		String dataString = String.valueOf(data);
+		for(int i=0;i<dataString.length()/groupSize;i++) {
+			int start = i*groupSize;
+			int end = i*groupSize + groupSize;
+			String subData = dataString.substring(start, end);
+			int subDataInteger = Integer.parseInt(subData);
+			key += subDataInteger;
+		}
+		key = key % this.arraySize;
+		return key;
+	}
+	
+	
 	
 	 /* Function to get prime number less than table size for myhash2 function */  
     public int getPrime()  

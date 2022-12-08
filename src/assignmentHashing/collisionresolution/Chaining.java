@@ -43,11 +43,54 @@ public class Chaining {
 		this.getChainedArray()[key].addFirst(data);
 	}
 	
+	/**
+	 * module as hashing function.
+	 * 
+	 * @param data
+	 * @return
+	 */
 	private int hash(int data) {
 		int key = data % this.chainedArraySize;
 		return key;
 	}
-
+	
+	/**
+	 * divisor as hash function.
+	 * 
+	 * @param data
+	 * @return
+	 */
+	private int hashDivisor(int data) {
+		int key = data / this.chainedArraySize;
+		return key;
+	}
+	
+	
+	/**
+	 * folding hash function.
+	 * 
+	 * @param data
+	 * @Return
+	 */
+	private int hashFolding(int data) {
+		// divide the data into length of 2.
+		int groupSize = 2;
+		int key = 0;
+		String dataString = String.valueOf(data);
+		for(int i=0;i<dataString.length()/groupSize;i++) {
+			int start = i*groupSize;
+			int end = i*groupSize + groupSize;
+			String subData = dataString.substring(start, end);
+			int subDataInteger = Integer.parseInt(subData);
+			key += subDataInteger;
+		}
+		key = key % this.chainedArraySize;
+		return key;
+	}
+	
+	
+	
+	
 	public LinkedList<Integer>[] getChainedArray() {
 		return chainedArray;
 	}
